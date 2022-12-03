@@ -1,0 +1,74 @@
+package Employee_;
+
+import java.util.Vector;
+
+public class Main {
+    public static void main(String arg[]) {
+        Employee e1 = new Employee("zhangsan", 20, "s101", "d01", 3);
+        e1.print();
+        System.out.println();
+
+        Employee e2 = new Employee("lisi", 20, "s202", "d02", 4);
+        e2.print();
+        System.out.println();
+
+        e2 = new Employee("maliu", 20, "s102", "d01", 5);
+
+        Manager m1 = new Manager("wangwu", 30, "s100", "d01", 9);
+
+        m1.getSubordinates().addElement(e1.name);
+        m1.getSubordinates().addElement(e2.name);
+        m1.print();
+        System.out.println();
+    }
+}
+class Person{
+    String name;
+    int age;
+}
+class Employee extends Person{
+    String Work_number;
+    String section;
+    int level;
+
+    public Employee(String name, int age,String work_number,String section,int level) {
+        this.name = name;
+        this.Work_number = work_number;
+        this.section = section;
+        this.level = level;
+        this.age = age;
+    }
+
+    void print(){
+        System.out.println("I am a Employee");
+        System.out.printf("My name is %s,I am %d years old.\n",this.name,this.age);
+        System.out.printf("I am a %d level Employee.My employeeNumber is %s." +
+                "I am working in %s\n",this.level,this.Work_number,this.section);
+    }
+}
+class Manager extends Employee{
+    Vector<String> underling = new Vector();
+    public Manager(String name, int age,String work_number,String section,int level){
+        super(name,age,work_number,section,level);
+    }
+
+    public Vector<String> getSubordinates() {
+        return this.underling;
+    }
+
+    void print(){
+        System.out.println("I am a Manager");
+        System.out.printf("My name is %s,I am %d years old.\n",this.name,this.age);
+        System.out.printf("I am a %d level Employee.My employeeNumber is %s." +
+                "I am working in %s\n",this.level,this.Work_number,this.section);
+        System.out.println("My subordinate has:");
+        for(int i = 0; i<this.underling.size(); i++){
+            if (i<this.underling.size()-1){
+                System.out.printf("%s,",this.underling.get(i));
+            }
+            else {
+                System.out.printf("%s.\n",this.underling.get(i));
+            }
+        }
+    }
+}
